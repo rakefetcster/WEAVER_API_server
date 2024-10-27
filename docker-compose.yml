@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  flask-app:
+    build:
+      context: ./flask-app  # Path to your Flask app directory
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5000"  # Map port 5002 of the host to port 5000 of the container
+    volumes:
+      - ./flask-app:/usr/src/app  # Mount the Flask app directory for live updates
+    depends_on:
+      - pyspark
+    networks:
+      - app-network
+
+  pyspark:
+    image: bitnami/spark:latest
+    container_name: pyspark
+    ports:
+      - "8080:8080"  # Expose Spark UI on port 8080
+    environment:
+      - SPARK_MODE=master
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
