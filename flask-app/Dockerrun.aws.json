@@ -1,0 +1,30 @@
+{
+    "AWSEBDockerrunVersion": "2",
+    "containerDefinitions": [
+      {
+        "name": "flask-app",
+        "image": "rakefet/flask-app:latest", 
+        "memory": 512,
+        "essential": true,
+        "portMappings": [
+          {
+            "containerPort": 5000,
+            "hostPort": 5000
+          }
+        ]
+      },
+      {
+        "name": "pyspark",
+        "image": "bitnami/spark:latest",
+        "memory": 1024,
+        "essential": true,
+        "portMappings": [
+          {
+            "containerPort": 8080,
+            "hostPort": 8080
+          }
+        ]
+      }
+    ]
+  }
+  
