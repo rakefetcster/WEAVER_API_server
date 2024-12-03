@@ -40,4 +40,6 @@ COPY app.py ./
 EXPOSE 5000
 
 # Command to run the Flask application
-CMD ["python3", "app.py"]
+# CMD ["python3", "app.py"] For development or testing 
+# For production (e.g., AWS Elastic Beanstalk)
+CMD ["gunicorn", "application:app", "-b", "0.0.0.0:5000"] 
